@@ -26,6 +26,7 @@ class Updater {
 		$steps = new \ProgressIterator(
 			[
 				'addConfigTable',
+				'installGridImages',
 			]
 		);
 
@@ -121,6 +122,23 @@ class Updater {
 					'value' => $value
 				])->save();
 			}
+		}
+	}
+
+	private function installGridImages()
+	{
+		$installed = ee('Model')->get('Fieldtype')
+			->filter('name', 'grid_images')
+			->first();
+
+		if ( ! $installed)
+		{
+			ee('Model')->make('Fieldtype', [
+				'name'                => 'grid_images',
+				'version'             => '1.0',
+				'settings'            => [],
+				'has_global_settings' => 'n',
+			])->save();
 		}
 	}
 }
