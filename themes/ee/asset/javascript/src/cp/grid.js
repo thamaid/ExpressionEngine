@@ -791,11 +791,11 @@ Grid.Settings.prototype = {
 	 */
 	_swapNamespace: function(html, oldNamespace, newNamespace) {
 		return html.replace(
-				RegExp('name="grid\\[cols\\]\\[' + oldNamespace + '\\]', 'g'),
-				'name="grid[cols][' + newNamespace + ']'
+				RegExp('name="'+this.settings.fieldName+'\\[cols\\]\\[' + oldNamespace + '\\]', 'g'),
+				'name="'+this.settings.fieldName+'[cols][' + newNamespace + ']'
 			).replace(
-				RegExp('data-input-value="grid\\[cols\\]\\[' + oldNamespace + '\\]', 'g'),
-				'data-input-value="grid[cols][' + newNamespace + ']'
+				RegExp('data-input-value="'+this.settings.fieldName+'\\[cols\\]\\[' + oldNamespace + '\\]', 'g'),
+				'data-input-value="'+this.settings.fieldName+'[cols][' + newNamespace + ']'
 			)
 	},
 
