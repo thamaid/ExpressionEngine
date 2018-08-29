@@ -1051,7 +1051,7 @@ class Grid_lib {
 				'col_type' => $type,
 				'col_label' => '',
 				'col_required' => 'n',
-				'col_name' => 'n',
+				'col_name' => '',
 				'col_settings' => array()
 			);
 		}
