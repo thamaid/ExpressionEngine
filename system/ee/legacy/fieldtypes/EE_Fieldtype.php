@@ -355,7 +355,6 @@ abstract class EE_Fieldtype {
 	 */
 	public function post_save($data)
 	{
-		// $this->settings['entry_id'];
 		return;
 	}
 
