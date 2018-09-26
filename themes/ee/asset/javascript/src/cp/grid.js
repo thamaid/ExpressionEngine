@@ -314,6 +314,8 @@ Grid.Publish.prototype = Grid.MiniField.prototype = {
 		if (EE.cp && EE.cp.formValidation !== undefined) {
 			EE.cp.formValidation.bindInputs(el);
 		}
+
+		return el;
 	},
 
 	/**
