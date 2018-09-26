@@ -459,7 +459,7 @@ class Filepicker_mcp {
 					return [
 						'ajax' => TRUE,
 						'body' => [
-							'duplicate'
+							'error' => 'duplicate'
 						]
 					];
 				}
@@ -467,7 +467,12 @@ class Filepicker_mcp {
 				return [
 					'ajax' => TRUE,
 					'body' => [
-						'success'
+						// Inconsistent casing for backwards compatibility
+						'title'              => $file->file_name,
+						'file_name'          => $file->file_name,
+						'isImage'            => $file->isImage(),
+						'thumb_path'         => $file->getAbsoluteThumbnailURL(),
+						'upload_location_id' => $file->upload_location_id
 					]
 				];
 			}
