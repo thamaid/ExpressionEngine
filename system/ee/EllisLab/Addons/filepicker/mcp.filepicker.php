@@ -447,6 +447,16 @@ class Filepicker_mcp {
 
 		$file = $result['file'];
 
+		if (isset($result['upload_response']['error']))
+		{
+			return [
+				'ajax' => TRUE,
+				'body' => [
+					'error' => $result['upload_response']['error']
+				]
+			];
+		}
+
 		if ($result['posted'])
 		{
 			$errors = $result['validation_result'];
@@ -459,7 +469,9 @@ class Filepicker_mcp {
 					return [
 						'ajax' => TRUE,
 						'body' => [
-							'error' => 'duplicate'
+							'duplicate'          => TRUE,
+							'file_id'            => $file->getId(),
+							'original_file_name' => $result['upload_response']['file_data_orig_name']
 						]
 					];
 				}
@@ -477,6 +489,13 @@ class Filepicker_mcp {
 				];
 			}
 		}
+
+		return [
+			'ajax' => TRUE,
+			'body' => [
+				'error' => $errors
+			]
+		];
 	}
 
 	protected function overwriteOrRename($file, $original_name)
