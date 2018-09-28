@@ -452,6 +452,7 @@ class Filepicker_mcp {
 			return [
 				'ajax' => TRUE,
 				'body' => [
+					'status' => 'error',
 					'error' => $result['upload_response']['error']
 				]
 			];
@@ -469,9 +470,10 @@ class Filepicker_mcp {
 					return [
 						'ajax' => TRUE,
 						'body' => [
-							'duplicate'          => TRUE,
-							'file_id'            => $file->getId(),
-							'original_file_name' => $result['upload_response']['file_data_orig_name']
+							'status'           => 'duplicate',
+							'duplicate'        => TRUE,
+							'fileId'           => $file->getId(),
+							'originalFileName' => $result['upload_response']['file_data_orig_name']
 						]
 					];
 				}
@@ -480,6 +482,7 @@ class Filepicker_mcp {
 					'ajax' => TRUE,
 					'body' => [
 						// Inconsistent casing for backwards compatibility
+						'status'             => 'success',
 						'title'              => $file->file_name,
 						'file_name'          => $file->file_name,
 						'isImage'            => $file->isImage(),
@@ -493,6 +496,7 @@ class Filepicker_mcp {
 		return [
 			'ajax' => TRUE,
 			'body' => [
+				'status' => 'error',
 				'error' => $errors
 			]
 		];
