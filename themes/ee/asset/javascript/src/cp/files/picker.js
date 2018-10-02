@@ -26,6 +26,10 @@
 				options.callback(data, picker);
 			};
 
+		if (options.iframe) {
+			return openInIframe(url)
+		}
+
 		$.get(url, function(data) {
 			modal.find('div.box').html(data);
 
@@ -103,7 +107,11 @@
 			$(this).parents('div.box').load(url+'&'+payload_elements.serialize());
 		});
 		$('.modal-file').on('click', '.tbl-action .action', function(e) {
-			e.preventDefault();
+			e.preventDefault()
+			openInIframe($(this).attr('href'))
+		});
+
+		function openInIframe(url) {
 			$('div.box', modal).html("<iframe></iframe>");
 
 			var frame = $('iframe', modal);
@@ -165,9 +173,9 @@
 				}
 			});
 
-			frame.attr('src', $(this).attr('href'));
+			frame.attr('src', url);
 			bindFrameUnload();
-		});
+		}
 	};
 
 	$.fn.FilePicker = function(defaults) {
