@@ -192,11 +192,6 @@ class File_ft extends EE_Fieldtype {
 				}
 			}
 
-			$fp_upload = clone $fp_link;
-			$fp_upload
-				->setText(lang('upload_file'))
-				->setAttribute('class', 'btn action file-field-filepicker');
-
 			$fp_edit = clone $fp_link;
 			$fp_edit
 				->setText('')
@@ -212,9 +207,12 @@ class File_ft extends EE_Fieldtype {
 
 			ee()->cp->add_js_script(array(
 				'file' => array(
-					'fields/file/cp'
+					'fields/file/cp',
+					'fields/file/file_field_drag_and_drop'
 				),
 			));
+
+			ee()->file_field->loadDragAndDropAssets();
 
 			return ee('View')->make('file:publish')->render(array(
 				'field_name' => $this->field_name,
@@ -224,8 +222,9 @@ class File_ft extends EE_Fieldtype {
 				'is_image' => ($file && $file->isImage()),
 				'thumbnail' => ee('Thumbnail')->get($file)->url,
 				'fp_url' => $fp->getUrl(),
-				'fp_upload' => $fp_upload,
-				'fp_edit' => $fp_edit
+				'fp_edit' => $fp_edit,
+				'allowed_directory' => $allowed_file_dirs,
+				'content_type' => $content_type
 			));
 		}
 
