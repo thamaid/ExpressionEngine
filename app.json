@@ -1,0 +1,8 @@
+{
+  "env": {
+    "DATABASE_URL": {
+      "description": "Location of, and credentials to, the database instance for this app.",
+      "required": true
+    }
+  }
+}
